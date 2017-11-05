@@ -24,8 +24,8 @@ if len(myargs.keys()) != 0:
 	sys.exit()
 # }
 
-credentials2 = pika.PlainCredentials(host, 'raspberry')
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='172.29.124.160',credentials = credentials2 ))
+credentials2 = pika.PlainCredentials('pi', 'raspberry')
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=host,credentials = credentials2 ))
 channel = connection.channel()
 
 channel.exchange_declare(exchange=rmq_params["exchange"],
