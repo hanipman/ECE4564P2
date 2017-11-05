@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 import pika
 import sys
-credentials = pika.PlainCredentials('pi', 'raspberry')
-parameters = pika.ConnectionParameters(credentials=credentials)
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='172.29.124.160'))
+credentials2 = pika.PlainCredentials('pi', 'raspberry')
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='172.29.124.160',credentials = credentials2 ))
 channel = connection.channel()
 
 channel.exchange_declare(exchange='direct_logs',
