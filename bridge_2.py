@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 import pika
 import sys
-
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+credentials = pika.PlainCredentials('guest', 'guest')
+parameters = pika.ConnectionParameters(credentials=credentials)
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='172.29.124.160'))
 channel = connection.channel()
 
 channel.exchange_declare(exchange='direct_logs',
