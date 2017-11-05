@@ -28,7 +28,7 @@ credentials2 = pika.PlainCredentials(host, 'raspberry')
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='172.29.124.160',credentials = credentials2 ))
 channel = connection.channel()
 
-channel.exchange_declare(exchange='direct_logs',
+channel.exchange_declare(exchange=rmq_params["exchange"],
                          exchange_type='direct')
 
 severity = sys.argv[1] if len(sys.argv) > 2 else 'info'
