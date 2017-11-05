@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import pika
 import sys
-credentials = pika.PlainCredentials('guest', 'guest')
+credentials = pika.PlainCredentials('pi', 'raspberry')
 parameters = pika.ConnectionParameters(credentials=credentials)
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='172.29.124.160'))
 channel = connection.channel()
