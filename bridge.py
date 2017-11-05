@@ -31,7 +31,7 @@ try:
         data = client_sock.recv(1024)
 		data = str(data)
 		if s.startswith('p:')
-			print("cool")
+            print("cool")
         if len(data) == 0: break
         print("received [%s]" % data)
 except IOError:
