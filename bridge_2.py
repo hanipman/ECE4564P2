@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import pika
 import sys
+import rmq_params.py
 
 # https://gist.github.com/didler/2395703 {
 def getopts(argv):
