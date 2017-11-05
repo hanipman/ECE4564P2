@@ -31,7 +31,8 @@ try:
 		data = client_sock.recv(1024)
 		data = str(data)
 		command = data[:1]
-		if (command == "p:"):
+		print(command)
+		if commmand is 'p:'
 			print("cool")
 		if len(data) == 0: break
 		print("received [%s]" % data)
