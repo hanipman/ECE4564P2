@@ -30,7 +30,7 @@ try:
 	while True:
 		data = client_sock.recv(1024)
 		data = str(data)
-		command = data[2:3]
+		command = data[2] +data[3]
 		print(command)
 		if command is 'p:':
 			print("cool")
