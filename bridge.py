@@ -30,7 +30,8 @@ try:
 	while True:
 		data = client_sock.recv(1024)
 		data = str(data)
-		if ((data[0] + data[1]) == "p:")
+		command = data[:1]
+		if (command == "p:")
 			print("cool")
 		if len(data) == 0: break
 		print("received [%s]" % data)
