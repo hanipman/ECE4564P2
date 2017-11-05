@@ -66,7 +66,7 @@ try:
 	while True:
 		data = client_sock.recv(1024)
 		data = str(data)
-		command = data[2] +data[3]
+		command = data[0] +data[1]
 		print(data)
 		print(command)
 		if command is 'p:':
