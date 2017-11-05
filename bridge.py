@@ -30,7 +30,7 @@ try:
 	while True:
 		data = client_sock.recv(1024)
 		data = str(data)
-		if s.startswith('p:')
+		if data.startswith( 'p:' )
 			print("cool")
 		if len(data) == 0: break
 		print("received [%s]" % data)
