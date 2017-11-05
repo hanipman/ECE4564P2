@@ -32,7 +32,7 @@ try:
 		data = str(data)
 		command = data[:1]
 		print(command)
-		if commmand is 'p:'
+		if commmand is 'p:':
 			print("cool")
 		if len(data) == 0: break
 		print("received [%s]" % data)
