@@ -33,9 +33,7 @@ channel.exchange_declare(exchange=rmq_params["exchange"],
 
 severity = sys.argv[1] if len(sys.argv) > 2 else 'info'
 message = ' '.join(sys.argv[2:]) or 'Hello World!'
-channel.basic_publish(exchange='direct_logs',
-                      routing_key=severity,
-                      body=message)
+
 print(" [x] Sent %r:%r" % (severity, message))
 
 ###################################################################3
@@ -67,10 +65,12 @@ try:
 		data = client_sock.recv(1024)
 		data = str(data)
 		command = data[0] +data[1]
+		message = data.split('"')[1].split('"')[0]
+		severity = data.split(':')[1].split(' ')[0]
 		#print(data)
 		print(command)
 		if (command == "p:"):
-			print("cool")
+			channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
 		if len(data) == 0: break
 		print("received [%s]" % data)
 except IOError:
