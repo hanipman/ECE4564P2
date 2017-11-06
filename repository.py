@@ -1,33 +1,42 @@
-#!/usr/bin/env python
 import pika
 import sys
+from rmq_params import rmq_params
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 
-channel.exchange_declare(exchange='direct_logs',
-                         exchange_type='direct')
+channel.exchange_declare(exchange=rmq_params["exchange"],exchange_type='direct')
 
-result = channel.queue_declare(exclusive=True)
+result = channel.queue_declare(queue=rmq_params["master_queue"])
 queue_name = result.method.queue
+channel.queue_purge(queue_name)
+channel.queue_unbind(queue=queue_name, exchange=rmq_params["exchange"], routing_key=queue_name)
+channel.queue_bind(exchange=rmq_params["exchange"], queue=queue_name, routing_key=queue_name)
 
-severities = sys.argv[1:]
-if not severities:
-    sys.stderr.write("Usage: %s [info] [warning] [error]\n" % sys.argv[0])
-    sys.exit(1)
+result = channel.queue_declare(queue=rmq_params["status_queue"])
+queue_name = result.method.queue
+channel.queue_purge(queue_name)
+channel.queue_unbind(queue=queue_name, exchange=rmq_params["exchange"], routing_key=queue_name)
+channel.queue_bind(exchange=rmq_params["exchange"], queue=queue_name, routing_key=queue_name)
 
-for severity in severities:
-    channel.queue_bind(exchange='direct_logs',
-                       queue=queue_name,
-                       routing_key=severity)
+count = 0
+list_queue = list(rmq_params["queues"])
+while count < len(list_queue):
+	result = channel.queue_declare(queue=list_queue[count])
+	queue_name = result.method.queue
+	channel.queue_purge(queue_name)
+	channel.queue_unbind(queue=queue_name, exchange=rmq_params["exchange"], routing_key=queue_name)
+	channel.queue_bind(exchange=rmq_params["exchange"], queue=queue_name, routing_key=queue_name)
+	channel.queue_bind(exchange=rmq_params["exchange"], queue=rmq_params["master_queue"], routing_key=queue_name)
+	count = count + 1
 
-print(' [*] Waiting for logs. To exit press CTRL+C')
+print(' Waiting for messages.' )
 
 def callback(ch, method, properties, body):
-    print(" [x] %r:%r" % (method.routing_key, body))
+    print(" [x] %r" % body)
 
 channel.basic_consume(callback,
-                      queue=queue_name,
+                      queue=rmq_params["master_queue"],
                       no_ack=True)
 
 channel.start_consuming()

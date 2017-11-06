@@ -4,6 +4,6 @@ rmq_params = {
 	"password": "raspberry",
 	"exchange": "squires",
 	"queues": {"messages", "events", "food"},
-	"master_queues": "master",
+	"master_queue": "master",
 	"status_queue": "status"
 }
