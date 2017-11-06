@@ -79,12 +79,18 @@ try:
 			#print(message)
 			severity = data.split(':')[1].split(' ')[0]
 			#severity = "what"
-			print(command)
+			#print(command)
 			if (command == "p:"):
 				channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
-				print("whats up")
+				#print("whats up")
+			else if (command == "c:"):
+				print("consume")
+			else if (command == "h:"):
+				print("print history")
+			else:
+				print("This is an invalid command")
 			if len(data) == 0: break
-			print("received [%s]" % data)
+			#print("received [%s]" % data)
 		temp = temp + 1
 except IOError:
     pass
