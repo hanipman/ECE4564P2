@@ -71,7 +71,8 @@ try:
 		data = client_sock.recv(1024)
 		data = str(data)
 		command = data[0] +data[1]
-		message = (data.split('"')[1])[:-1]
+		message = (data.split('"')[1])
+		print(message)
 		severity = data.split(':')[1].split(' ')[0]
 		#print(data)
 		print(command)
