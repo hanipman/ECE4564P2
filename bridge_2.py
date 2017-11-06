@@ -83,9 +83,9 @@ try:
 			if (command == "p:"):
 				channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
 				#print("whats up")
-			else if (command == "c:"):
+			elif (command == "c:"):
 				print("consume")
-			else if (command == "h:"):
+			elif (command == "h:"):
 				print("print history")
 			else:
 				print("This is an invalid command")
