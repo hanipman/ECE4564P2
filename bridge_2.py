@@ -64,7 +64,7 @@ client_sock.send("Available Queues:")
 count = 0
 list_queue = list(rmq_params["queues"])
 while count < len(list_queue):
-	client_sock.send(list_queue.index(count))
+	client_sock.send(list_queue[count])
 	count = count + 1
 try:
 	while True:
