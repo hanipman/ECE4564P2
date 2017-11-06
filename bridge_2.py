@@ -28,7 +28,8 @@ if len(myargs.keys()) != 0:
 
 ########################################################################################3
 
-db = pymongo.MongoClient().test
+client = MongoClient()
+db = client.test_database
 
 
 
