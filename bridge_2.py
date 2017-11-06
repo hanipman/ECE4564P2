@@ -91,7 +91,7 @@ try:
 			print(severity)
 			if severity in list_queue:
 				if (command == "p:"):
-					channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
+					channel.basic_publish(exchange=rmq_params["exchange"],routing_key=severity,body=message)
 					time_ = str(time.time())
 					#collection = db.test_collection
 					#datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
