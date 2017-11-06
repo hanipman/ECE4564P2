@@ -73,7 +73,7 @@ try:
 		command = data[0] +data[1]
 		message = (data.split('"')[1])
 		print(data)
-		print(message)
+		#print(message)
 		severity = data.split(':')[1].split(' ')[0]
 		print(command)
 		if (command == "p:"):
