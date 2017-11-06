@@ -59,7 +59,12 @@ print("Waiting for connection on RFCOMM channel %d" % port)
 
 client_sock, client_info = server_sock.accept()
 print("Accepted connection from ", client_info)
-client_sock.send("Hello world")
+client_sock.send("Communicating on exchange: " + rmq_params["exchange"])
+client_sock.send("Available Queues:")
+count = 0
+while count < len(rmq_params)
+	client_sock.send(rmq_params.queues[count])
+	count = count + 1
 try:
 	while True:
 		data = client_sock.recv(1024)
