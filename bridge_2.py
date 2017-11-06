@@ -90,12 +90,12 @@ try:
 			if severity in list_queue:
 				if (command == "p:"):
 					channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
-					datab = {"Action": commmand[0], “Place”: rmq_params["exchange"],"MsgID": "team_31$"+ time.time(),"Subject": severity, "Message": message}
+					datab = {"Action": commmand[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+ time.time(),"Subject": severity, "Message": message}
 					db.utilization.insert(datab)
 					#print("whats up")
 				elif (command == "c:"):
 					datab = {"Action": commmand[0], “Place”: rmq_params["exchange"],"MsgID": "team_31$"+ time.time(),"Subject": severity, "Message": message}
-					db.utilization.insert(datab)
+					db.collection.insert(datab)
 					print("consume")
 				elif (command == "h:"):
 					db.listcollections()
