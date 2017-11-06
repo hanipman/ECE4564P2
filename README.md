@@ -14,6 +14,9 @@
 # imports:
 #       sys             - allows use of commandline arguments
 #       rmq_param	- variables for initializing
+#	pika		- allows creation of channels, exchanges, queues
+#	time		- timestamp for mongodb
+#	pymongo		- api for access to mongodb
 
 # Chris Boado   - mainly worked on repository.py
 # Eric Chandler - mainly worked on bridge.py
