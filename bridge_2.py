@@ -68,16 +68,16 @@ while count < len(list_queue):
 	count = count + 1
 try:
 	while True:
-		data = client_sock.recv(1024)
+		data = client_sock.recv(2048)
 		data = str(data)
 		command = data[0] +data[1]
 		message = (data.split('"')[1])
 		print(data)
-		#print(message)
+		print(message)
 		severity = data.split(':')[1].split(' ')[0]
 		print(command)
 		if (command == "p:"):
-			#channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
+			channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
 			print("whats up")
 		if len(data) == 0: break
 		print("received [%s]" % data)
