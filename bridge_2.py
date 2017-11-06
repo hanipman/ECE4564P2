@@ -94,7 +94,7 @@ try:
 				#print("received [%s]" % data)
 			else:
 				print("This queue does not exist")
-			temp = temp + 1
+		temp = temp + 1
 except IOError:
     pass
 
