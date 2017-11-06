@@ -70,19 +70,20 @@ try:
 	while True:
 		data = client_sock.recv(2048)
 		data = str(data)
-		command = data[0] +data[1]
-		#message = (data.split('"')[1])
-		message = "sup"
-		print(data)
-		print(message)
-		#severity = data.split(':')[1].split(' ')[0]
-		severity = "what"
-		print(command)
-		if (command == "p:"):
-			channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
-			print("whats up")
-		if len(data) == 0: break
-		print("received [%s]" % data)
+		if (data != "\n"):
+			command = data[0] +data[1]
+			#message = (data.split('"')[1])
+			message = "sup"
+			print(data)
+			print(message)
+			#severity = data.split(':')[1].split(' ')[0]
+			severity = "what"
+			print(command)
+			if (command == "p:"):
+				channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
+				print("whats up")
+			if len(data) == 0: break
+			print("received [%s]" % data)
 except IOError:
     pass
 
