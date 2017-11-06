@@ -89,7 +89,7 @@ try:
 			#print(command)
 			if severity in list_queue:
 				if (command == "p:"):
-					channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
+					channel.basic_publish(exchange='direct_logs',routing_key="master",body=message)
 					#print("whats up")
 				elif (command == "c:"):
 					print("consume")
