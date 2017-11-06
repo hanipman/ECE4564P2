@@ -119,6 +119,7 @@ while True:
 					elif (command == "h:"):
 						#print(collection[0])
 						print("print history")
+						channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["status_queue"],body="blue")
 					else:
 						print("This is an invalid command")
 					if len(data) == 0: break
