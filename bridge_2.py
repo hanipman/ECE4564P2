@@ -62,8 +62,9 @@ print("Accepted connection from ", client_info)
 client_sock.send("Communicating on exchange: " + rmq_params["exchange"])
 client_sock.send("Available Queues:")
 count = 0
-while count < len(rmq_params):
-	client_sock.send((rmq_params["queues"])[count])
+list_queue = list(rmq_params["queues"])
+while count < len(list_queue):
+	client_sock.send(list_queue.index(count))
 	count = count + 1
 try:
 	while True:
