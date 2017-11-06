@@ -4,7 +4,7 @@ import time
 import pymongo
 import sys
 from rmq_params import rmq_params
-
+from pymongo import MongoClient
 # https://gist.github.com/didler/2395703 {
 def getopts(argv):
 	opts ={}
