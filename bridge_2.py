@@ -34,7 +34,7 @@ db = pymongo.MongoClient().test
 
 
 credentials2 = pika.PlainCredentials(rmq_params["username"], rmq_params["password"])
-connection = pika.BlockingConnection(pika.ConnectionParameters(host=host,credentials = credentials2 ))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host=host,virtual_host = rmq_params["vhost"], credentials = credentials2 ))
 channel = connection.channel()
 
 channel.exchange_declare(exchange=rmq_params["exchange"],
