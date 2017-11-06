@@ -84,14 +84,13 @@ try:
 			#message = "sup"
 			#print(data)
 			#print(message)
-			#severity = data.split(':')[1].split(' ')[0]
-			severity = "master"
+			severity = data.split(':')[1].split(' ')[0]
+			#severity = "master"
 			#print(command)
-			#if severity in list_queue:
-			if (severity == "master"):
+			if severity in list_queue:
 				if (command == "p:"):
 					channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
-					print("whats up")
+					#print("whats up")
 				elif (command == "c:"):
 					print("consume")
 				elif (command == "h:"):
