@@ -68,6 +68,7 @@ print("Waiting for connection on RFCOMM channel %d" % port)
 
 client_sock, client_info = server_sock.accept()
 print("Accepted connection from ", client_info)
+channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="green")
 client_sock.send("Communicating on exchange: " + rmq_params["exchange"] + '\n')
 client_sock.send("Available Queues:"+ '\n')
 count = 0
@@ -123,7 +124,7 @@ client_sock.close()
 server_sock.close()
 print("all done")
 
-
+channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="red")
 ##################################
 
 
