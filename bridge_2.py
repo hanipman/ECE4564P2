@@ -66,11 +66,12 @@ list_queue = list(rmq_params["queues"])
 while count < len(list_queue):
 	client_sock.send(list_queue[count]+ '\n')
 	count = count + 1
+temp = 0
 try:
 	while True:
 		data = client_sock.recv(2048)
 		data = str(data)
-		if (data != '\n'):
+		if (temp%2 == 0):
 			command = data[0] +data[1]
 			#message = (data.split('"')[1])
 			message = "sup"
@@ -84,6 +85,7 @@ try:
 				print("whats up")
 			if len(data) == 0: break
 			print("received [%s]" % data)
+		temp = temp + 1
 except IOError:
     pass
 
