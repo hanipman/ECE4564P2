@@ -70,7 +70,7 @@ try:
 	while True:
 		data = client_sock.recv(2048)
 		data = str(data)
-		if (data != "\n"):
+		if (data != '\n'):
 			command = data[0] +data[1]
 			#message = (data.split('"')[1])
 			message = "sup"
