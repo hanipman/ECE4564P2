@@ -1,3 +1,14 @@
+# I used example code provided on the canvas slides
+#I used bluetooth code provided by the following
+<
+# file: rfcomm-server.py
+# auth: Albert Huang <albert@csail.mit.edu>
+# desc: simple demonstration of a server application that uses RFCOMM sockets
+#
+# $Id: rfcomm-server.py 518 2007-08-10 07:20:07Z albert $
+>
+
+
 #!/usr/bin/env python
 import pika
 import time
