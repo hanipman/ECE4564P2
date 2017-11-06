@@ -63,69 +63,69 @@ advertise_service( server_sock, "SampleServer",
                    profiles = [ SERIAL_PORT_PROFILE ], 
 #                   protocols = [ OBEX_UUID ] 
                     )
-                   
-print("Waiting for connection on RFCOMM channel %d" % port)
+while true:
+	print("Waiting for connection on RFCOMM channel %d" % port)
 
-client_sock, client_info = server_sock.accept()
-print("Accepted connection from ", client_info)
-channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="green")
-client_sock.send("Communicating on exchange: " + rmq_params["exchange"] + '\n')
-client_sock.send("Available Queues:"+ '\n')
-count = 0
-list_queue = list(rmq_params["queues"])
-while count < len(list_queue):
-	client_sock.send(list_queue[count]+ '\n')
-	count = count + 1
-temp = 0
-try:
-	while True:
-		data = client_sock.recv(2048)
-		data = str(data)
-		if (temp%2 == 0):
-			command = data[0] +data[1]
-			message = (data.split('"')[1])
-			#message = "sup"
-			#print(data)
-			#print(message)
-			severity = data.split(':')[1].split(' ')[0]
-			#severity = "master"
-			print(severity)
-			if severity in list_queue:
-				if (command == "p:"):
-					channel.basic_publish(exchange=rmq_params["exchange"],routing_key=severity,body=message)
-					time_ = str(time.time())
-					#collection = db.test_collection
-					#datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
-					#db.utilization.insert(datab)
-					print("whats up")
-					channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="purple")
-				elif (command == "c:"):
-					time_ = str(time.time())
-					#db.collection.insert(datab)
-					print("consume")
-					#datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
-					channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="yellow")
-				elif (command == "h:"):
-					#print(collection[0])
-					print("print history")
+	client_sock, client_info = server_sock.accept()
+	print("Accepted connection from ", client_info)
+	channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="green")
+	client_sock.send("Communicating on exchange: " + rmq_params["exchange"] + '\n')
+	client_sock.send("Available Queues:"+ '\n')
+	count = 0
+	list_queue = list(rmq_params["queues"])
+	while count < len(list_queue):
+		client_sock.send(list_queue[count]+ '\n')
+		count = count + 1
+	temp = 0
+	try:
+		while True:
+			data = client_sock.recv(2048)
+			data = str(data)
+			if (temp%2 == 0):
+				command = data[0] +data[1]
+				message = (data.split('"')[1])
+				#message = "sup"
+				#print(data)
+				#print(message)
+				severity = data.split(':')[1].split(' ')[0]
+				#severity = "master"
+				print(severity)
+				if severity in list_queue:
+					if (command == "p:"):
+						channel.basic_publish(exchange=rmq_params["exchange"],routing_key=severity,body=message)
+						time_ = str(time.time())
+						#collection = db.test_collection
+						#datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
+						#db.utilization.insert(datab)
+						print("whats up")
+						channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="purple")
+					elif (command == "c:"):
+						time_ = str(time.time())
+						#db.collection.insert(datab)
+						print("consume")
+						#datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
+						channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="yellow")
+					elif (command == "h:"):
+						#print(collection[0])
+						print("print history")
+					else:
+						print("This is an invalid command")
+					if len(data) == 0: break
+					#print("received [%s]" % data)
 				else:
-					print("This is an invalid command")
-				if len(data) == 0: break
-				#print("received [%s]" % data)
-			else:
-				print("This queue does not exist")
-		temp = temp + 1
-except IOError:
-    pass
+					print("This queue does not exist")
+			temp = temp + 1
+	except IOError:
+	    pass
 
-print("disconnected")
+	print("disconnected")
 
-client_sock.close()
-server_sock.close()
-print("all done")
+	#client_sock.close()
+	#server_sock.close()
+	#print("all done")
 
-channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="red")
-##################################
+	channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="red")
+	##################################
 
 
-#connection.close()
+	#connection.close()
