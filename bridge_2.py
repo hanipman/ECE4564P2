@@ -80,18 +80,21 @@ try:
 			severity = data.split(':')[1].split(' ')[0]
 			#severity = "what"
 			#print(command)
-			if (command == "p:"):
-				channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
-				#print("whats up")
-			elif (command == "c:"):
-				print("consume")
-			elif (command == "h:"):
-				print("print history")
+			if severity in list_queue:
+				if (command == "p:"):
+					channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
+					#print("whats up")
+				elif (command == "c:"):
+					print("consume")
+				elif (command == "h:"):
+					print("print history")
+				else:
+					print("This is an invalid command")
+				if len(data) == 0: break
+				#print("received [%s]" % data)
 			else:
-				print("This is an invalid command")
-			if len(data) == 0: break
-			#print("received [%s]" % data)
-		temp = temp + 1
+				print("This queue does not exist")
+			temp = temp + 1
 except IOError:
     pass
 
