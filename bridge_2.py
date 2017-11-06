@@ -59,7 +59,7 @@ print("Waiting for connection on RFCOMM channel %d" % port)
 
 client_sock, client_info = server_sock.accept()
 print("Accepted connection from ", client_info)
-
+client_sock.send("Hello world")
 try:
 	while True:
 		data = client_sock.recv(1024)
