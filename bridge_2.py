@@ -113,6 +113,15 @@ while True:
 					elif (command == "c:"):
 						time_ = str(time.time())
 						#db.collection.insert(datab)
+						def callback(ch, method, properties, body):
+							print("[Checkpoint 03] Consumed a message published with routing_key: '" + method.routing_key + "'")
+							print("[Checkpoint 04] Message: " + str(body))
+							client_sock.send(str(body))
+							
+						print("[Checkpoint 02] Consuming messages from '" + rmq_params["master_queue"] + "' queue")
+						channel.basic_consume(callback,queue=severity,no_ack=True)
+						#Begin consuming
+						channel.start_consuming()
 						print("consume")
 						#datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
 						channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["status_queue"],body="yellow")
