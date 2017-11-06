@@ -28,8 +28,8 @@ if len(myargs.keys()) != 0:
 
 ########################################################################################3
 
-client = MongoClient()
-db = client.test_database
+db = pymongo.MongoClient().test
+
 
 
 
@@ -94,8 +94,8 @@ try:
 					channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
 					time_ = str(time.time())
 					#collection = db.test_collection
-					#datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
-					#collection.insert_one(datab)
+					datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
+					db.utilization.insert(datab)
 					print("whats up")
 				elif (command == "c:"):
 					time_ = str(time.time())
