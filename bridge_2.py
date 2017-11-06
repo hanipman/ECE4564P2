@@ -96,14 +96,14 @@ try:
 					collection = db.test_collection
 					datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
 					collection.insert_one(datab)
-					#print("whats up")
+					print("whats up")
 				elif (command == "c:"):
 					time_ = str(time.time())
 					datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
 					db.collection.insert(datab)
 					print("consume")
 				elif (command == "h:"):
-					db.listcollections()
+					print(collection[0])
 					print("print history")
 				else:
 					print("This is an invalid command")
