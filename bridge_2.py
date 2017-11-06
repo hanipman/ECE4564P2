@@ -78,6 +78,7 @@ try:
 		print(command)
 		if (command == "p:"):
 			#channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
+			print("whats up")
 		if len(data) == 0: break
 		print("received [%s]" % data)
 except IOError:
