@@ -100,9 +100,9 @@ try:
 					channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="purple")
 				elif (command == "c:"):
 					time_ = str(time.time())
-					#datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
 					#db.collection.insert(datab)
 					print("consume")
+					#datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
 					channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="yellow")
 				elif (command == "h:"):
 					#print(collection[0])
