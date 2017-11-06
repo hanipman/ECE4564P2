@@ -24,7 +24,7 @@ if len(myargs.keys()) != 0:
 	sys.exit()
 # }
 
-credentials2 = pika.PlainCredentials('pi', 'raspberry')
+credentials2 = pika.PlainCredentials(rmq_parama["username"], rmq_parama["password"])
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=host,credentials = credentials2 ))
 channel = connection.channel()
 
