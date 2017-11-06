@@ -72,9 +72,9 @@ try:
 		data = str(data)
 		command = data[0] +data[1]
 		message = (data.split('"')[1])
+		print(data)
 		print(message)
 		severity = data.split(':')[1].split(' ')[0]
-		#print(data)
 		print(command)
 		if (command == "p:"):
 			channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
