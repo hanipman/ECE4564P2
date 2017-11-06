@@ -77,7 +77,7 @@ try:
 		severity = data.split(':')[1].split(' ')[0]
 		print(command)
 		if (command == "p:"):
-			channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
+			#channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
 		if len(data) == 0: break
 		print("received [%s]" % data)
 except IOError:
