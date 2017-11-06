@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import pika
+import pymongo
 import sys
 from rmq_params import rmq_params
 
@@ -23,6 +24,12 @@ if len(myargs.keys()) != 0:
 	print('Invalid arguments')
 	sys.exit()
 # }
+
+########################################################################################3
+
+db = pymongo.MongoClient().test
+
+
 
 credentials2 = pika.PlainCredentials(rmq_params["username"], rmq_params["password"])
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=host,credentials = credentials2 ))
