@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import pika
+import time
 import pymongo
 import sys
 from rmq_params import rmq_params
