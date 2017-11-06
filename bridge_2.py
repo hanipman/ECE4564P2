@@ -91,7 +91,7 @@ try:
 			if (severity == "master"):
 				if (command == "p:"):
 					channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
-					#print("whats up")
+					print("whats up")
 				elif (command == "c:"):
 					print("consume")
 				elif (command == "h:"):
