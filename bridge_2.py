@@ -88,7 +88,7 @@ try:
 			#print(message)
 			severity = data.split(':')[1].split(' ')[0]
 			#severity = "master"
-			#print(command)
+			print(severity)
 			if severity in list_queue:
 				if (command == "p:"):
 					channel.basic_publish(exchange='direct_logs',routing_key=severity,body=message)
