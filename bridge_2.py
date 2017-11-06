@@ -68,7 +68,7 @@ while True:
 
 	client_sock, client_info = server_sock.accept()
 	print("Accepted connection from ", client_info)
-	channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="green")
+	channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["status_queue"],body="green")
 	client_sock.send("Communicating on exchange: " + rmq_params["exchange"] + '\n')
 	client_sock.send("Available Queues:"+ '\n')
 	count = 0
@@ -98,13 +98,13 @@ while True:
 						#datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
 						#db.utilization.insert(datab)
 						print("whats up")
-						channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="purple")
+						channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["status_queue"],body="purple")
 					elif (command == "c:"):
 						time_ = str(time.time())
 						#db.collection.insert(datab)
 						print("consume")
 						#datab = {"Action": command[0], "Place": rmq_params["exchange"],"MsgID": "team_31$"+time_,"Subject": severity, "Message": message}
-						channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="yellow")
+						channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["status_queue"],body="yellow")
 					elif (command == "h:"):
 						#print(collection[0])
 						print("print history")
@@ -124,7 +124,7 @@ while True:
 	#server_sock.close()
 	#print("all done")
 
-	channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["ex_status"],body="red")
+	channel.basic_publish(exchange=rmq_params["exchange"],routing_key=rmq_params["status_queue"],body="red")
 	##################################
 
 
