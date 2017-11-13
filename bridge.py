@@ -104,6 +104,7 @@ while True:
 				if severity in list_queue:
 					if (command == "p:"):
 						message = (data.split('"')[1])
+						print("Received data: " + data)
 						channel.basic_publish(exchange=rmq_params["exchange"],routing_key=severity,body=message)
 						time_ = str(time.time())
 						#collection = db.test_collection
