@@ -94,7 +94,7 @@ while True:
 			data = str(data)
 			if (temp%2 == 0):
 				command = data[0] +data[1]
-				message = (data.split('"')[1])
+				
 				#message = "sup"
 				#print(data)
 				#print(message)
@@ -103,6 +103,7 @@ while True:
 				#print(severity)
 				if severity in list_queue:
 					if (command == "p:"):
+						message = (data.split('"')[1])
 						channel.basic_publish(exchange=rmq_params["exchange"],routing_key=severity,body=message)
 						time_ = str(time.time())
 						#collection = db.test_collection
